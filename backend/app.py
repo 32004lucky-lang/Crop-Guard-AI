@@ -31,7 +31,7 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
 
 
 def db():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -110,7 +110,13 @@ def init_db():
     conn.close()
 
 
-init_db()
+try:
+    init_db()
+except Exception as e:
+    import sys
+    import traceback
+    print(f"Error initializing database: {e}", file=sys.stderr)
+    traceback.print_exc(file=sys.stderr)
 
 
 def current_user():

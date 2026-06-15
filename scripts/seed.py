@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash
 BASE=Path(__file__).resolve().parents[1]
 DB=BASE/'instance'/'cropguard.db'
 DB.parent.mkdir(exist_ok=True)
-conn=sqlite3.connect(DB)
+conn=sqlite3.connect(DB, timeout=30.0)
 cur=conn.cursor()
 cur.executescript('''
 CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,email TEXT UNIQUE NOT NULL,password_hash TEXT NOT NULL,role TEXT NOT NULL,farm_name TEXT,location TEXT,created_at TEXT NOT NULL);
