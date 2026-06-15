@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+Werkzeug
+pillow
+python-dotenv
+gunicorn
